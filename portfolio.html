@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <!-- Load Tailwind CSS from CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Load Inter font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Custom styles for the Inter font and smooth scroll */
+    body {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header and Navigation -->
+  <header class="sticky top-0 z-50 bg-white shadow-sm py-4">
+    <div class="container mx-auto flex items-center px-4">
+      <div class="text-2xl font-bold">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-10 h-10">
+			<defs>
+			  <linearGradient id="gradient-vb" x1="0%" y1="0%" x2="100%" y2="0%">
+				<stop offset="0%" style="stop-color:#8B2C24" />
+				<stop offset="100%" style="stop-color:#F2A5A0" />
+			  </linearGradient>
+			</defs>
+			<g fill="url(#gradient-vb)">
+				<text x="50" y="65" font-family="Brush Script MT, cursive" font-size="70" font-weight="700" text-anchor="middle">VB</text>
+			</g>
+		</svg>
+	  </div>
+      <nav class="hidden md:flex flex-grow items-center justify-center space-x-6 text-gray-600 font-medium">
+        <a href="#home" class="hover:text-gray-900 transition duration-300">Home</a>
+        <a href="#about" class="hover:text-gray-900 transition duration-300">About</a>
+        <a href="#projects" class="hover:text-gray-900 transition duration-300">Projects</a>
+        <a href="#contact" class="hover:text-gray-900 transition duration-300">Contact</a>
+      </nav>
+      <!-- LinkedIn Icon for Desktop -->
+      <a 
+		  href="https://www.linkedin.com/in/vishakha-bhujbal" 
+		  target="_blank" 
+		  aria-label="LinkedIn Profile" 
+		  class="ml-auto text-gray-600 hover:text-[#0077B5] transition-transform duration-300 hover:scale-110"
+		>
+		  <!-- LinkedIn SVG Icon -->
+		  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+			<path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 
+					 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.3
+					 c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 
+					 1.75 1.75-.78 1.75-1.75 1.75zm13.5 11.3h-3v-5.6c0-1.34-.03-3.07-1.87-3.07
+					 -1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.88v1.36h.04c.4-.75 
+					 1.38-1.54 2.85-1.54 3.05 0 3.61 2.01 3.61 4.63v5.55z"/>
+		  </svg>
+		</a>
+      <div class="md:hidden ml-auto">
+        <button id="menu-button" class="text-gray-600 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-sm pb-4">
+    <nav class="flex flex-col items-center space-y-4 text-gray-600 font-medium">
+      <a href="#home" class="w-full text-center py-2 hover:bg-gray-100 transition duration-300">Home</a>
+      <a href="#about" class="w-full text-center py-2 hover:bg-gray-100 transition duration-300">About</a>
+      <a href="#projects" class="w-full text-center py-2 hover:bg-gray-100 transition duration-300">Projects</a>
+      <a href="#contact" class="w-full text-center py-2 hover:bg-gray-100 transition duration-300">Contact</a>
+      <!-- LinkedIn Icon for Mobile -->
+      <a href="https://www.linkedin.com/in/vishakha-bhujbal" target="_blank" aria-label="LinkedIn Profile" class="w-full text-center py-2 hover:bg-gray-100 transition duration-300">
+        <svg class="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.23 0H1.77C.8 0 0 .78 0 1.74v20.52c0 .96.8 1.74 1.77 1.74h20.46c.97 0 1.77-.78 1.77-1.74V1.74c0-.96-.8-1.74-1.77-1.74zM7.05 19.34h-3.5V8.5h3.5v10.84zM5.3 7.02c-1.14 0-2.07-.94-2.07-2.09s.93-2.09 2.07-2.09 2.07.94 2.07 2.09-.93 2.09-2.07 2.09zM19.95 19.34h-3.5V13.8c0-1.32-.96-1.57-1.28-1.57-.33 0-2.22.25-2.22 3.12v4.09h-3.5v-7.39c0-2.73 1.7-4.95 3.9-4.95 2.2 0 3.32 1.45 3.32 1.45V8.5h3.29s.05.6.14 1.34h-.05v.23c.53-.78 1.76-1.55 3.23-1.55 3.02 0 5.4 2.15 5.4 6.78v4.13z"></path>
+        </svg>
+        LinkedIn
+      </a>
+    </nav>
+  </div>
+
+  <!-- Main Content Container -->
+  <main class="container mx-auto px-4 py-8 max-w-7xl">
+  
+    <!-- Home Section -->
+    <section id="home" class="py-16 md:py-24">
+      <!-- About Me with Photo -->
+      <div class="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-12">
+        <div class="flex-1 text-center md:text-left">
+          <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
+			  <span class="bg-clip-text text-transparent bg-[linear-gradient(to_right,#8B2C24,#F2A5A0,#8B2C24)]">
+				Vishakha Bhujbal
+			  </span>
+			</h1>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-700 mt-4">Software Engineer & Data Enthusiast</h2>
+          <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-xl mx-auto md:mx-0">
+            Software engineer with 4 years of experience in backend development, SQL optimization, and data-driven problem solving. I thrive on solving complex problems by designing efficient systems and uncovering insights from data to support innovation.
+          </p>
+          <div class="mt-4 flex justify-center md:justify-start space-x-4">
+            <a href="#projects" 
+			   class="inline-block bg-gradient-to-r from-[#8B2C24] to-[#F2A5A0] 
+					  text-white font-medium px-6 py-3 rounded-full 
+					  hover:scale-105 transition duration-300 shadow-md">
+			  View My Work
+			</a>
+            <a href="#contact" class="bg-gray-200 text-gray-900 font-medium px-6 py-3 rounded-full hover:bg-gray-300 transition duration-300 transform hover:scale-105">Get In Touch</a>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-xl ring-4 ring-white">
+          <img src="assets\Vishakha.B.jpg" alt="Vishakha Bhujbal's photo" class="w-full h-full object-cover">
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+	<section id="about" class="py-12 md:py-16">
+	  <div class="mt-2 bg-white rounded-xl p-6 shadow-sm">
+		<h2 class="text-4xl font-bold text-gray-900 mb-2 text-center">About Me</h2>
+		<div class="h-1 w-24 mx-auto mb-6 bg-gradient-to-r from-[#8B2C24] to-[#F2A5A0] rounded-full"></div>
+
+
+	<!-- Row 1: Professional Experience -->
+    <div class="bg-gray-100 rounded-xl p-6 mb-8">
+      <h3 class="text-2xl font-bold text-gray-900 mb-4">Professional Experience</h3>
+      <div class="flex items-start space-x-4 mb-6">
+        <img src="assets\Yardi_logo.png" alt="Yardi Logo" class="w-12 h-12 rounded-full object-cover">
+        <div>
+          <h4 class="text-xl font-semibold text-gray-900">Yardi Systems</h4>
+          <p class="text-sm text-gray-500">Aug 2019 - Jul 2023 · 4 yrs</p>
+          <div class="flex items-center text-sm text-gray-500 space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#8B2C24]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 6-9 13-9 13s-9-7-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Pune, India</span>
+          </div>
+        </div>
+      </div>
+      <div class="relative pl-6">
+        <div class="absolute left-3 top-0 bottom-0 w-0.5 bg-gray-300 rounded-full"></div>
+        <div class="relative mb-6">
+          <span class="absolute -left-5 top-0.5 w-5 h-5 rounded-full ring-2 ring-gray-100" 
+			style="background: linear-gradient(to right, #8B2C24, #F2A5A0);"></span>
+          <h5 class="text-lg font-semibold ml-3" 
+			style="background: linear-gradient(to right, #8B2C24, #F2A5A0); -webkit-background-clip: text; color: transparent;">Software Analyst</h5>
+          <p class="text-sm text-gray-500 mt-1 ml-2">2021 - 2023</p>
+          <p class="text-sm text-gray-600 mt-2 ml-2">
+            Led resolution of high priority production issues through root cause analysis, mentored junior analysts, and authored technical documentation, boosting team efficiency, reducing resolution time by 25% and implementing preventive fixes to ensure long term system stability.
+          </p>
+        </div>
+        <div class="relative">
+          <span class="absolute -left-5 top-0.5 w-5 h-5 rounded-full ring-2 ring-gray-100" 
+			style="background: linear-gradient(to right, #8B2C24, #F2A5A0);"></span>
+          <h5 class="text-lg font-semibold ml-3" 
+			style="background: linear-gradient(to right, #8B2C24, #F2A5A0); -webkit-background-clip: text; color: transparent;">Software Engineer / Software Engineer Trainee</h5>
+          <p class="text-sm text-gray-500 mt-1 ml-2">2019 - 2021</p>
+          <p class="text-sm text-gray-600 mt-2 ml-2">
+            Completed extensive training on the Voyager product, gained hands on experience resolving production issues, and supported feature enhancements to strengthen product expertise while improving resolution efficiency.
+          </p>
+        </div>
+      </div>
+    </div>
+	
+	<!-- Row 2: Technical Skills -->
+	<div class="mt-8 mb-8 bg-gray-100 rounded-xl p-8">
+	  <h3 class="text-2xl font-bold text-gray-900 mb-6">Technical Skills</h3>
+
+	  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+		
+		<!-- Programming & CS Fundamentals -->
+		<div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition text-center">
+		  <div class="w-12 h-12 mx-auto mb-3 bg-blue-100 rounded-full flex items-center justify-center">
+			<svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+			
+			  <path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path>
+			</svg>
+		  </div>
+		  <h4 class="text-lg font-semibold text-gray-800">Programming & CS Fundamentals</h4>
+		  <p class="text-sm text-gray-600 mt-1">Java, Python, C++, C, Data Structures, Algorithms, Object-Oriented Programming (OOP)</p>
+		</div>
+
+		<!-- Databases & Query Languages -->
+		<div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition text-center">
+		  <div class="w-12 h-12 mx-auto mb-3 bg-green-100 rounded-full flex items-center justify-center">
+			<svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+			  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+			  <path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"></path>
+			</svg>
+		  </div>
+		  <h4 class="text-lg font-semibold text-gray-800">Databases & Query Languages</h4>
+		  <p class="text-sm text-gray-600 mt-1">MySQL, MS SQL Server, PostgreSQL, NoSQL (MongoDB)</p>
+		</div>
+
+		<!-- Cloud, Backend & Version Control -->
+		<div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition text-center">
+		  <div class="w-12 h-12 mx-auto mb-3 bg-orange-100 rounded-full flex items-center justify-center">
+			<svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+			  <rect x="2" y="4" width="20" height="8" rx="2" ry="2"></rect>
+			  <rect x="2" y="12" width="20" height="8" rx="2" ry="2"></rect>
+			  <path d="M6 16h.01M6 8h.01"></path>
+			</svg>
+		  </div>
+		  <h4 class="text-lg font-semibold text-gray-800">Cloud, Backend & Version Control</h4>
+		  <p class="text-sm text-gray-600 mt-1">Amazon Web Services (AWS), Git, GitHub, SSH (Remote Development)</p>
+		</div>
+
+		<!-- Data Visualization & Analytics Tools -->
+		<div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition text-center">
+		  <div class="w-12 h-12 mx-auto mb-3 bg-purple-100 rounded-full flex items-center justify-center">
+			<svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+			  <line x1="18" y1="20" x2="18" y2="10"></line>
+			  <line x1="12" y1="20" x2="12" y2="4"></line>
+			  <line x1="6" y1="20" x2="6" y2="14"></line>
+			</svg>
+		  </div>
+		  <h4 class="text-lg font-semibold text-gray-800">Data Visualization & Analytics Tools</h4>
+		  <p class="text-sm text-gray-600 mt-1">Tableau, Matplotlib, Seaborn, Plotly</p>
+		</div>
+
+		<!-- Development Tools & Productivity -->
+		<div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition text-center">
+		  <div class="w-12 h-12 mx-auto mb-3 bg-pink-100 rounded-full flex items-center justify-center">
+			<svg class="w-6 h-6 text-pink-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+			  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+			  <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
+			</svg>
+		  </div>
+		  <h4 class="text-lg font-semibold text-gray-800">Development Tools & Productivity</h4>
+		  <p class="text-sm text-gray-600 mt-1">Visual Studio Code, SQL Server Management Studio (SSMS), Microsoft Office Suite, Google Workspace, Windows, Linux (Ubuntu)</p>
+		</div>
+		
+		<!-- Web Technologies -->
+		<div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition text-center">
+		  <div class="w-12 h-12 mx-auto mb-3 bg-teal-100 rounded-full flex items-center justify-center">
+			<svg class="w-6 h-6 text-teal-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+			  <circle cx="12" cy="12" r="10"></circle>
+			  <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"></path>
+			</svg>
+		  </div>
+		  <h4 class="text-lg font-semibold text-gray-800">Web Technologies</h4>
+		  <p class="text-sm text-gray-600 mt-1">HTML, CSS, REST APIs, Frontend-Backend Integration</p>
+		</div>
+
+	  </div>
+	</div>
+
+	<!-- Row 3: Why Work With Me + Get to Know Me -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      <!-- Why Work With Me -->
+      <div class="bg-gray-100 rounded-xl p-6">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Why Work With Me?</h3>
+        <ul class="text-gray-700 space-y-2">
+          <li class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#8B2C24] flex-shrink-0" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-8.8"></path>
+              <path d="M22 4L12 14.01l-3-3"></path>
+            </svg>
+            <span>4 years of professional experience</span>
+          </li>
+          <li class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#8B2C24] flex-shrink-0" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-8.8"></path>
+              <path d="M22 4L12 14.01l-3-3"></path>
+            </svg>
+            <span>Software development expertise</span>
+          </li>
+          <li class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#8B2C24] flex-shrink-0" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-8.8"></path>
+              <path d="M22 4L12 14.01l-3-3"></path>
+            </svg>
+            <span>Agile development methodology</span>
+          </li>
+          <li class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#8B2C24] flex-shrink-0" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-8.8"></path>
+              <path d="M22 4L12 14.01l-3-3"></path>
+            </svg>
+            <span>Innovative solutions and Problem Solving</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Get to Know Me -->
+		<div class="bg-gray-100 rounded-xl p-6 space-y-2">
+		  <h3 class="text-2xl font-bold text-gray-900 mb-4">Get to Know Me</h3>
+
+		  <!-- Graduation / Education -->
+		  <div class="flex items-center space-x-4">
+			  <img src="assets\BU_logo.png" alt="Graduation" class="w-8 h-8 shadow-md">
+			  <span class="text-gray-700">
+				State University of New York | Master of Science in Computer Science | August 2025
+			  </span>
+			</div>
+		  <div class="flex items-center space-x-4">
+			  <img src="assets\sppu_logo.jpg" alt="Graduation" class="w-8 h-8 shadow-md">
+			  <span class="text-gray-700">
+				Savitribai Phule Pune University | Bachelor of Engineering in Computer Science| May 2019
+			  </span>
+			</div>
+			
+		  <!-- Email -->
+		  <div class="flex items-center space-x-4">
+			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#8B2C24]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+			  <path d="M22 6l-10 7-10-7"></path>
+			</svg>
+			<span class="text-gray-700">vbhujbal@binghamton.edu</span>
+		  </div>
+
+		  <!-- Location -->
+		  <div class="flex items-center space-x-4">
+			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#8B2C24]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			  <path d="M21 10c0 6-9 13-9 13s-9-7-9-13a9 9 0 0 1 18 0z"></path>
+			  <circle cx="12" cy="10" r="3"></circle>
+			</svg>
+			<span class="text-gray-700">Binghamton, NY</span>
+		  </div>
+		</div>
+
+	</section>
+
+    <!-- Projects Section -->
+	<section id="projects" class="py-12 md:py-24">
+		<h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-2">My Projects</h2>
+		<div class="h-1 w-24 mx-auto mb-6 bg-gradient-to-r from-[#8B2C24] to-[#F2A5A0] rounded-full"></div>
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+			<!-- 1. Happiness Trends Forecast -->
+			<div class="project-card bg-white rounded-xl shadow-lg p-6 transition duration-300 ease-in-out cursor-pointer">
+				<h3 class="text-xl font-semibold text-gray-900 mb-2">Happiness Trends Forecast</h3>
+				<div class="flex flex-wrap gap-2 mb-4">
+					<span class="bg-[#F4E3D3] text-[#70321F] text-sm font-medium px-2 py-1 rounded-full">Python</span>
+					<span class="bg-[#F4E3D3] text-[#70321F] text-sm font-medium px-2 py-1 rounded-full">Pandas</span>
+					<span class="bg-[#F4E3D3] text-[#70321F] text-sm font-medium px-2 py-1 rounded-full">Scikit-learn</span>
+					<span class="bg-[#F4E3D3] text-[#70321F] text-sm font-medium px-2 py-1 rounded-full">Plotly</span>
+				</div>
+				<p class="text-gray-600 mb-4">
+					Preprocessed and analyzed global happiness datasets, identifying key drivers like GDP and social support. Developed a predictive model using Prophet to forecast future happiness trends and created interactive dashboards for visualization.
+				</p>
+				<a href="https://colab.research.google.com/drive/1FcoMRxICUSvPwcVOBewp7CrPo35Oqv4J?usp=sharing" class="text-[#8B2C24] hover:text-[#BFB1A8] font-medium transition duration-300">View Project →</a>
+			</div>
+
+			<!-- 2. File Duplicate Finder System -->
+			<div class="project-card bg-white rounded-xl shadow-lg p-6 transition duration-300 ease-in-out cursor-pointer">
+				<h3 class="text-xl font-semibold text-gray-900 mb-2">File Duplicate Finder System</h3>
+				<div class="flex flex-wrap gap-2 mb-4">
+					<span class="bg-[#F4E3D3] text-[#70321F] text-sm font-medium px-2 py-1 rounded-full">C</span>
+					<span class="bg-[#F4E3D3] text-[#70321F] text-sm font-medium px-2 py-1 rounded-full">Makefile</span>
+					<span class="bg-[#F4E3D3] text-[#70321F] text-sm font-medium px-2 py-1 rounded-full">Linux</span>
+					<span class="bg-[#F4E3D3] text-[#70321F] text-sm font-medium px-2 py-1 rounded-full">Git</span>
+				</div>
+				<p class="text-gray-600 mb-4">
+					Designed and built a command-line system in C to detect and remove duplicate files using hashing. Optimized for large datasets and automated with a Makefile to ensure reliability and efficient file management.
+				</p>
+				<a href="https://github.com/vbhujbal13/File-Duplicate-Finder-System" class="text-[#8B2C24] hover:text-[#BFB1A8] font-medium transition duration-300">View Project →</a>
+			</div>
+
+			<!-- 3. Hotel Review System -->
+			<div class="project-card bg-white rounded-xl shadow-lg p-6 transition duration-300 ease-in-out cursor-pointer">
+				<h3 class="text-xl font-semibold text-gray-900 mb-2">Hotel Review System</h3>
+				<div class="flex flex-wrap gap-2 mb-4">
+					<span class="bg-[#F4E3D3] text-[#70321F] text-sm font-medium px-2 py-1 rounded-full">Python</span>
+					<span class="bg-[#F4E3D3] text-[#70321F] text-sm font-medium px-2 py-1 rounded-full">MongoDB</span>
+					<span class="bg-[#F4E3D3] text-[#70321F] text-sm font-medium px-2 py-1 rounded-full">Tkinter</span>
+					<span class="bg-[#F4E3D3] text-[#70321F] text-sm font-medium px-2 py-1 rounded-full">Data Analysis</span>
+				</div>
+				<p class="text-gray-600 mb-4">
+					Analyzed hotel reviews dataset to provide insights for users and hotel managers. Implemented 4 key analyses: hotel rating trends, peak seasons by state, top hotels in each city, and identifying loyal customers for targeted promotions. Features a Python Tkinter GUI connected to MongoDB.
+				</p>
+				<a href="https://github.com/vbhujbal13/Hotel_Review_System" class="text-[#8B2C24] hover:text-[#BFB1A8] font-medium transition duration-300">View Project →</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Publications Section -->
+	<section id="publications" class="py-12 md:py-16">
+		<div class="container mx-auto px-4">
+			<h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-2">Publication</h2>
+			<div class="h-1 w-24 mx-auto mb-6 bg-gradient-to-r from-[#8B2C24] to-[#F2A5A0] rounded-full"></div>
+			<div class="bg-gray-100 rounded-xl p-6 shadow-lg">
+				<h3 class="text-2xl font-semibold text-gray-900 mb-2">AI–IoT Based Self Organizing Approach of Swarm Robots</h3>
+				<p class="text-sm text-gray-600 font-medium mb-4">
+					International Journal of Innovative Research in Technology (IJIRT) | May 17, 2019
+				</p>
+				<p class="text-gray-700 leading-relaxed mb-4">
+					This paper explores the integration of Artificial Intelligence (AI) and the Internet of Things (IoT) in swarm robotics. It presents a self-organizing approach where robots coordinate autonomously using ultrasonic sensors and a centralized communication model to optimize task execution with minimal human intervention.
+				</p>
+				<a href="https://ijirt.org/article?manuscript=148106" target="_blank" class="text-[#8B2C24] hover:text-[#BFB1A8] font-medium transition duration-300">
+					View Publication →
+				</a>
+			</div>
+		</div>
+	</section>	
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 md:py-24">
+	<form id="contact-form" action="http://localhost:5000/send" method="POST">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-2">Get In Touch</h2>
+	  <div class="h-1 w-24 mx-auto mb-6 bg-gradient-to-r from-[#8B2C24] to-[#F2A5A0] rounded-full"></div>
+      <div class="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
+        <p class="text-center text-gray-600 mb-6">Questions? Opportunities? Let's talk! Reach out by filling the form below or find me on social media.</p>
+        <form id="contact-form" action="http://localhost:5000/send" method="POST">
+		  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+			<div>
+			  <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+			  <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+			</div>
+			<div>
+			  <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+			  <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+			</div>
+		  </div>
+
+		  <div class="mt-6">
+			<label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+			<input type="text" id="subject" name="subject" class="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+		  </div>
+
+		  <div class="mt-6">
+			<label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+			<textarea id="message" name="message" rows="5" class="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required></textarea>
+		  </div>
+
+		  <div class="mt-8 text-center">
+			<button type="submit" class="bg-gradient-to-r from-[#8B2C24] to-[#F2A5A0] text-white font-semibold px-8 py-3 rounded-full hover:scale-105 transition duration-300">Send Message</button>
+			<p class="flex justify-center items-center gap-2 text-gray-600 text-sm mt-3 italic">I typically respond within 1–2 business days. If it's time-sensitive, feel free to send a reminder or follow up.</p>
+		  </div>
+		</form>
+
+        <div id="form-status" class="mt-6 text-center hidden"></div>
+      </div>
+	  <div id="form-message" class="mt-4 text-center text-green-600 font-medium"></div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 text-gray-600 text-center py-6">
+    <p>&copy; 2025 Vishakha Bhujbal. Designed with ❤️. All rights reserved.</p>
+  </footer>
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+	
+  const menuButton = document.getElementById('menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const contactForm = document.getElementById('contact-form');
+  const formStatus = document.getElementById('form-status');
+
+  // Toggle mobile menu
+  menuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Smooth scrolling for mobile menu links
+  document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+
+  // Handle contact form submission
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Prevent page refresh
+
+    const formData = new FormData(contactForm);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch('http://localhost:5000/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        formStatus.textContent = '✅ Thank you for your message! I will get back to you soon.';
+        formStatus.classList.remove('hidden', 'text-red-600');
+        formStatus.classList.add('text-green-600');
+        contactForm.reset(); // Clear form fields
+      } else {
+        formStatus.textContent = '❌ Something went wrong. Please try again.';
+        formStatus.classList.remove('hidden', 'text-green-600');
+        formStatus.classList.add('text-red-600');
+      }
+    } catch (error) {
+      console.error('Error sending form:', error);
+      formStatus.textContent = '❌ Something went wrong. Please try again.';
+      formStatus.classList.remove('hidden', 'text-green-600');
+      formStatus.classList.add('text-red-600');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
